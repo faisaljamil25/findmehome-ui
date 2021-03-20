@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../../context/auth";
+import Snackbar from "../../context/snackbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -48,13 +47,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
+  const Context = React.useContext(AuthContext);
+  const Context2 = React.useContext(Snackbar);
   const classes = useStyles();
   const history = useHistory();
-  const submitHandler = async () => {
-    try {
-      const response = await axios.post("http://localhost:8000/auth/login");
-      console.log(response);
+  const [data, setData] = useState({
+    role: "landlord",
+    email: "",
+    password: "",
+  });
+  const inputEvent = (event) => {
+    const { value, name } = event.target;
+    setData((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      };
+    });
+  };
 
+  const submitHandler = async (event) => {
+    try {
+      event.preventDefault();
+      const response = await axios.post("http://localhost:8000/auth/login", {
+        ...data,
+      });
+      console.log(response);
+      await Context.getLoggedIn();
+      Context2.openbarfun("success", "User Logged In");
       history.push("/dashboard");
     } catch (error) {
       console.log(error);
@@ -81,8 +101,7 @@ export default function SignInSide() {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
-              autoFocus
+              onChange={inputEvent}
             />
             <TextField
               variant="outlined"
@@ -93,12 +112,9 @@ export default function SignInSide() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              onChange={inputEvent}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
