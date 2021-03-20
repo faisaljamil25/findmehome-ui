@@ -32,6 +32,7 @@ export default function TenantDialog(props) {
         scroll="paper"
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
+        fullScreen
       >
         <DialogTitle id="scroll-dialog-title">Clients:</DialogTitle>
         <DialogContent>
