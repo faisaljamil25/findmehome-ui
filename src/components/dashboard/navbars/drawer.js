@@ -197,17 +197,8 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          <ListItem
-            button="profile"
-            onClick={() => {
-              history.push("/profile");
-            }}
-          >
-            <ListItemIcon
-              onClick={() => {
-                history.push("/profile");
-              }}
-            >
+          <ListItem button="profile">
+            <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />

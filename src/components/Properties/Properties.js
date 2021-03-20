@@ -46,15 +46,16 @@ const Properties = () => {
         setHouses(houses);
       })
       .catch((e) => console.log(e));
-  }, [setHouses]);
+  }, []);
   return (
     <div>
       <div className="listProperty">
         <div className="row listPropertyHeader">
-          <Typography variant="h4">Recently Listed Properties</Typography>
+          <Typography variant="h4" className="property-heading">
+            Properties for Rent
+          </Typography>
           <Typography variant="h5">
-            Fusce risus metus, placerat in consectetur eu, porttitor a est sed
-            sed dolor lorem cras adipiscing
+            Find your Dream Home from 5 Lakh+ properties on our website
           </Typography>
         </div>
         <Grid container className={clsx("row", "listPropertyContent")}>

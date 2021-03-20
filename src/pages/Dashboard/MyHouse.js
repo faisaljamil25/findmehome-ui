@@ -88,7 +88,7 @@ const MyHouses = () => {
         <Grid container className={classes.content}>
           <Box>
             <Typography variant="h4" className={classes.heading}>
-              My House's
+              My Houses
             </Typography>
           </Box>
         </Grid>

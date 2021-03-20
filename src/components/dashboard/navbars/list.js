@@ -4,8 +4,8 @@ const list = [
     path: "/dashboard",
   },
   {
-    name: "Create Houses",
-    path: "/dashboard/create",
+    name: "Sell House",
+    path: "/dashboard/sell",
   },
   {
     name: "Booked Houses",
@@ -13,7 +13,7 @@ const list = [
   },
   {
     name: "My Houses",
-    path: "/dashboard/myhouses",
+    path: "/dashboard/myhouse",
   },
 ];
 export default list;
