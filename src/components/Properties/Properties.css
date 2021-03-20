@@ -1,8 +1,7 @@
 .listProperty .listPropertyHeader {
   text-align: center;
-  background-color: #00a9a4;
   padding: 20px;
-  color: white;
+  color: black;
 }
 
 .listProperty .listPropertyHeader h3 {

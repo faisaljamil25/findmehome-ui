@@ -37,6 +37,7 @@ const Card = () => {
           color="primary"
           aria-label="Book-Room"
           onClick={handleBookRoom}
+          size="small"
         >
           Book Room
         </Button>
