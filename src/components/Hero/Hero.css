@@ -2,7 +2,9 @@ img {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: -1;
 }
 
@@ -13,7 +15,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  /* box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); */
   object-fit: contain;
 }
 
