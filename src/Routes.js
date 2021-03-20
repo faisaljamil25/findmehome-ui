@@ -7,6 +7,8 @@ import React from "react";
 import AuthContext from "./context/auth";
 import CustomizedSnackbars from "./components/snackbar";
 import Snackbar from "./context/snackbar";
+import MyHouse from "./pages/Dashboard/MyHouse";
+
 const Error = () => {
   return (
     <h1>
@@ -50,6 +52,9 @@ export default function Routers() {
             <Switch>
               <Route exact path="/dashboard">
                 <Dashboard />
+              </Route>
+              <Route exact path="/dashboard/myhouse">
+                <MyHouse />
               </Route>
             </Switch>
           </>
