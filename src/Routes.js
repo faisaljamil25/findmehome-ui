@@ -8,6 +8,8 @@ import AuthContext from "./context/auth";
 import CustomizedSnackbars from "./components/snackbar";
 import Snackbar from "./context/snackbar";
 import MyHouse from "./pages/Dashboard/MyHouse";
+import SellHouse from "./pages/Dashboard/SellHouse";
+import Booked from "./pages/Dashboard/BookedHouse";
 
 const Error = () => {
   return <h1>Loading</h1>;
@@ -51,6 +53,12 @@ export default function Routers() {
               </Route>
               <Route exact path="/dashboard/myhouse">
                 <MyHouse />
+              </Route>
+              <Route exact path="/dashboard/sell">
+                <SellHouse />
+              </Route>
+              <Route exact path="/dashboard/booked">
+                <Booked />
               </Route>
             </Switch>
           </>
