@@ -24,6 +24,8 @@ import ViewComfyIcon from "@material-ui/icons/ViewComfy";
 import CreateIcon from "@material-ui/icons/Create";
 import PersonIcon from "@material-ui/icons/Person";
 import DoneIcon from "@material-ui/icons/Done";
+import AuthContext from "../../../context/auth";
+import Snackbar from "../../../context/snackbar";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -103,19 +105,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MiniDrawer() {
+  const Context = useContext(AuthContext);
+  const Context2 = useContext(Snackbar);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
 
-  //   async function Logout() {
-  //     const logout = await axios.get(
-  //       ""
-  //     );
-  //     Context2.openbarfun("info", logout.data);
-  //     console.log(logout);
-  //     await Context.getLoggedIn();
-  //     history.push("/");
-  //   }
+  async function Logout() {
+    const logout = await axios.get("http://localhost:8000/auth/logout");
+    Context2.openbarfun("info", logout.data);
+    console.log(logout);
+    await Context.getLoggedIn();
+    history.push("/");
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -145,7 +147,7 @@ export default function MiniDrawer() {
             className={classes.btn}
             variant="contained"
             color="secondary"
-            // onClick={Logout}
+            onClick={Logout}
           >
             Logout
           </Button>

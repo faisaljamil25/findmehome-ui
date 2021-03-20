@@ -26,7 +26,7 @@ export default function Routers() {
       <Switch>
         <Route exact path="/">
           {context.authdata.isLoggedIn ? (
-            <Redirect to="/dashbaord" />
+            <Redirect to="/dashboard" />
           ) : (
             <Home />
           )}
@@ -48,7 +48,7 @@ export default function Routers() {
         {context.authdata.isLoggedIn === true && (
           <>
             <Switch>
-              <Route exact path="/dashobard">
+              <Route exact path="/dashboard">
                 <Dashboard />
               </Route>
             </Switch>
