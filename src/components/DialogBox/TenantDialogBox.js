@@ -5,9 +5,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import ClientTable from "../Table/MyClientTable";
+import TenantTable from "../Table/MyTenantsTable";
 
-export default function ClientDialog(props) {
+export default function TenantDialog(props) {
   const { openDialog, closefun, data } = props;
 
   const handleClose = () => {
@@ -40,7 +40,7 @@ export default function ClientDialog(props) {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <ClientTable clients={data} />
+            <TenantTable tenants={data} />
           </DialogContentText>
         </DialogContent>
         <DialogActions>

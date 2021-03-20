@@ -12,25 +12,26 @@ import {
 import { Paper, Button } from "@material-ui/core";
 import axios from "axios";
 
-import ClientDialog from "../DialogBox/DialogBox";
+import TenantDialog from "../DialogBox/TenantDialogBox";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
 
-const getClients = async (HouseId) => {
+const getMyTenants = async (HouseId) => {
   try {
     const body = `query{
-                  getClients(EventId:"${HouseId}"){
+                  getMyTenants(HouseId:"${HouseId}"){
                    name
                    email
                    phone
-                   paymentId
+                   city
+                   address
                    }
                   }`;
     const response = await axios.post(
-      "https://localhost:8000/graphql",
+      "http://localhost:8000/graphql",
       {
         query: body,
       },
@@ -40,8 +41,8 @@ const getClients = async (HouseId) => {
         },
       }
     );
-    const clients = response.data.data.getClients;
-    return clients;
+    const Tenants = response.data.data.getMyTenants;
+    return Tenants;
   } catch (e) {
     console.log(e.response.data);
   }
@@ -49,13 +50,13 @@ const getClients = async (HouseId) => {
 
 export default function DenseTable(props) {
   const { data } = props;
-  const [clients, setClients] = useState([]);
+  const [tenants, setTenants] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const classes = useStyles();
-  const handleClients = async (EventId) => {
+  const handleTenants = async (HouseId) => {
     try {
-      const data = await getClients(EventId);
-      setClients(data);
+      const data = await getMyTenants(HouseId);
+      setTenants(data);
       setOpenDialog(true);
     } catch (e) {
       console.log(e);
@@ -64,12 +65,12 @@ export default function DenseTable(props) {
   if (data) {
     return (
       <>
-        <ClientDialog
+        <TenantDialog
           openDialog={openDialog}
           closefun={() => {
             setOpenDialog(false);
           }}
-          data={clients}
+          data={tenants}
         />
         <TableContainer component={Paper}>
           <Table
@@ -100,7 +101,7 @@ export default function DenseTable(props) {
                   <TableCell align="center">
                     <Button
                       onClick={() => {
-                        handleClients(house._id);
+                        handleTenants(house._id);
                       }}
                       variant="outlined"
                       color="secondary"

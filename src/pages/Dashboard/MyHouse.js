@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-const fetchEvents = async () => {
+const fetchHouses = async () => {
   try {
     const body = `query{
                 getMyHouses{
@@ -74,7 +74,7 @@ const MyHouses = () => {
   const classes = useStyles();
   const [house, setHouse] = useState([]);
   useEffect(() => {
-    fetchEvents()
+    fetchHouses()
       .then((data) => {
         setHouse(data);
       })

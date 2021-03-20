@@ -17,11 +17,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ClientTable(props) {
-  const { clients } = props;
+export default function TenantTable(props) {
+  const { tenants } = props;
+  console.log(tenants);
   const classes = useStyles();
 
-  if (clients) {
+  if (tenants) {
     return (
       <>
         <TableContainer component={Paper}>
@@ -32,19 +33,19 @@ export default function ClientTable(props) {
           >
             <TableHead>
               <TableRow>
-                <TableCell align="center">Client</TableCell>
+                <TableCell align="center">Tenant</TableCell>
                 <TableCell align="center">Email</TableCell>
                 <TableCell align="center">Phone</TableCell>
-                <TableCell align="center">PaymentId</TableCell>
+                <TableCell align="center">City</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {clients.map((client) => (
+              {tenants.map((tenant) => (
                 <TableRow>
-                  <TableCell align="center">{client.name}</TableCell>
-                  <TableCell align="center">{client.email}</TableCell>
-                  <TableCell align="center">{client.phone}</TableCell>
-                  <TableCell align="center">{client.paymentId}</TableCell>
+                  <TableCell align="center">{tenant.name}</TableCell>
+                  <TableCell align="center">{tenant.email}</TableCell>
+                  <TableCell align="center">{tenant.phone}</TableCell>
+                  <TableCell align="center">{tenant.city}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
