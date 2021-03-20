@@ -9,6 +9,7 @@ div.card {
   margin-bottom: 20px;
   cursor: pointer;
   text-decoration: none;
+  padding: 15px;
 }
 
 .figure {
@@ -150,8 +151,10 @@ div.card:hover .figure .figCaption > span:nth-child(2) {
 
 .figType {
   background-color: #eab134;
-  font-size: 10px;
-  line-height: 11px;
+  font-size: 15px;
+  line-height: 15px;
+  width: 80px;
+  height: 20px;
   color: #fff;
   padding: 2px 4px;
   border-radius: 2px;
