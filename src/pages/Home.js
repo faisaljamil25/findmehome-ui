@@ -1,7 +1,12 @@
+import Navbar from "../components/Navbar/Navbar";
+import Hero from "../components/Hero/Hero";
+import HouseCard from "../components/HouseCard/HouseCard";
 const Home = () => {
   return (
     <div>
-      <h1>FIND ME HOME</h1>
+      <Navbar />
+      <Hero />
+      <HouseCard />
     </div>
   );
 };
