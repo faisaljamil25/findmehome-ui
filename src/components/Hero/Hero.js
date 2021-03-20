@@ -11,7 +11,7 @@ function HeroSection() {
   // }
   return (
     <div className="hero-container">
-      <img src="/house.jpg" alt="bg" />
+      <img src="/house2.jpg" alt="bg" />
       <h1>NOW IT'S EASY TO FIND YOUR HOME</h1>
       <p>What are you waiting for?</p>
       <div className="hero-btns">
