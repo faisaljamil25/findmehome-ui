@@ -1,5 +1,10 @@
+import React, { useContext } from "react";
 import "./Card.css";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import Snackbar from "../../context/snackbar";
+import AuthContext from "../../context/auth";
 
 const Card = ({
   name,
@@ -11,9 +16,36 @@ const Card = ({
   dimensions,
   city,
 }) => {
-  const handleBookRoom = (e) => {
-    e.preventDefault();
-    console.log("booked");
+  const history = useHistory();
+  const context = React.useContext(AuthContext);
+  const Context2 = useContext(Snackbar);
+  const handleBookRoom = async (id) => {
+    try {
+      const body = `mutation{
+  createBooking(HouseId:"${id}"){
+    name
+    currentSharing
+    totalSharing
+  }
+}`;
+      const response = await axios.post(
+        "http://localhost:8000/graphql",
+        {
+          query: body,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data.data.createBooking.name)
+        Context2.openbarfun("success", "House Booked");
+      history.push("/");
+    } catch (error) {
+      console.log(error.response.data);
+      Context2.openbarfun("error", "Something Went Wrong");
+    }
   };
   return (
     <div className="singleHouse">
@@ -45,7 +77,11 @@ const Card = ({
           variant="contained"
           color="primary"
           aria-label="Book-Room"
-          onClick={handleBookRoom}
+          onClick={() => {
+            context.authdata.isLoggedIn
+              ? handleBookRoom(_id)
+              : history.push("/signup");
+          }}
           size="small"
         >
           Book Room
