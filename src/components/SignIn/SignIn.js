@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,10 +9,16 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import AuthContext from "../../context/auth";
 import Snackbar from "../../context/snackbar";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import { loginUser } from "../../api";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -51,27 +57,19 @@ export default function SignInSide() {
   const Context2 = React.useContext(Snackbar);
   const classes = useStyles();
   const history = useHistory();
-  const [data, setData] = useState({
-    role: "landlord",
+  const [role, setRole] = React.useState("landlord");
+  const [formState, SetFormState] = React.useState({
     email: "",
     password: "",
   });
-  const inputEvent = (event) => {
-    const { value, name } = event.target;
-    setData((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value,
-      };
-    });
+  const handleChange = (event) => {
+    setRole(event.target.value);
   };
 
-  const submitHandler = async (event) => {
+  const handleLogin = async (event) => {
     try {
       event.preventDefault();
-      const response = await axios.post("http://localhost:8000/auth/login", {
-        ...data,
-      });
+      const response = await loginUser({ ...formState, role });
       console.log(response);
       await Context.getLoggedIn();
       Context2.openbarfun("success", "User Logged In");
@@ -92,7 +90,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} onSubmit={submitHandler}>
+          <form className={classes.form} onSubmit={handleLogin}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -101,7 +99,9 @@ export default function SignInSide() {
               id="email"
               label="Email Address"
               name="email"
-              onChange={inputEvent}
+              onChange={(e) => {
+                SetFormState({ ...formState, email: e.target.value });
+              }}
             />
             <TextField
               variant="outlined"
@@ -112,8 +112,32 @@ export default function SignInSide() {
               label="Password"
               type="password"
               id="password"
-              onChange={inputEvent}
+              onChange={(e) => {
+                SetFormState({ ...formState, password: e.target.value });
+              }}
             />
+            <Grid item xs={12}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Role</FormLabel>
+                <RadioGroup
+                  aria-label="gender"
+                  name="role1"
+                  value={role}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value="landlord"
+                    control={<Radio />}
+                    label="Landlord"
+                  />
+                  <FormControlLabel
+                    value="tenant"
+                    control={<Radio />}
+                    label="Tenant"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
 
             <Button
               type="submit"

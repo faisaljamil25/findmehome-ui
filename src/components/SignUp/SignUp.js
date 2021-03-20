@@ -17,6 +17,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { registerUser } from "../../api";
 import { useHistory } from "react-router";
+import Snackbar from "../../context/snackbar";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
-
-  const [role, setRole] = React.useState("LANDLORD");
+  const Context = React.useContext(Snackbar);
+  const [role, setRole] = React.useState("landlord");
   const [formState, SetFormState] = React.useState({
     name: "",
     email: "",
@@ -55,12 +56,16 @@ export default function SignUp() {
   };
 
   const handleRegister = (e) => {
-    e.preventDefault();
-    console.log("here");
-    registerUser({ ...formState, role })
-      .then(() => alert("Registerd"))
-      .catch(() => console.log("Error"));
-    history.push("/signin");
+    try {
+      e.preventDefault();
+      // console.log("here");
+      registerUser({ ...formState, role })
+        .then(() => Context.openbarfun("success", "User Registered"))
+        .catch(() => console.log("Error"));
+      history.push("/signin");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -77,31 +82,19 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                name="name"
                 variant="outlined"
                 required
                 value={formState.name}
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="name"
+                label="Name"
                 onChange={(e) => {
                   SetFormState({ ...formState, name: e.target.value });
                 }}
                 autoFocus
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -114,7 +107,6 @@ export default function SignUp() {
                 onChange={(e) => {
                   SetFormState({ ...formState, email: e.target.value });
                 }}
-                autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,7 +122,6 @@ export default function SignUp() {
                 onChange={(e) => {
                   SetFormState({ ...formState, password: e.target.value });
                 }}
-                autoComplete="current-password"
               />
             </Grid>
             <Grid item xs={12}>
@@ -169,12 +160,12 @@ export default function SignUp() {
                   onChange={handleChange}
                 >
                   <FormControlLabel
-                    value="LANDLORD"
+                    value="landlord"
                     control={<Radio />}
                     label="Landlord"
                   />
                   <FormControlLabel
-                    value="TENANT"
+                    value="tenant"
                     control={<Radio />}
                     label="Tenant"
                   />

@@ -10,11 +10,7 @@ import Snackbar from "./context/snackbar";
 import MyHouse from "./pages/Dashboard/MyHouse";
 
 const Error = () => {
-  return (
-    <h1>
-      Errorasdfghjklddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    </h1>
-  );
+  return <h1>Loading</h1>;
 };
 export default function Routers() {
   const context = React.useContext(AuthContext);
