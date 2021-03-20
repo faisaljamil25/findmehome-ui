@@ -40,16 +40,24 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const [role, setRole] = React.useState("LANDLORD");
-  const [formState, SetFormState] = React.useState({ name: "", email: "", password: "", phone: "" })
+  const [formState, SetFormState] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    city: "",
+  });
   const handleChange = (event) => {
     setRole(event.target.value);
   };
 
-  const handleRegister = () => {
-    registerUser({ ...formState, role }).then(() => console.log("register")).catch(() => console.log("Ere"))
-  }
-
-
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log("here");
+    registerUser({ ...formState, role })
+      .then(() => console.log("register"))
+      .catch(() => console.log("Ere"));
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -61,9 +69,9 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={handleRegister}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -73,7 +81,9 @@ export default function SignUp() {
                 fullWidth
                 id="firstName"
                 label="First Name"
-                onChange={(e) => { SetFormState({ ...formState, name: e.target.value }) }}
+                onChange={(e) => {
+                  SetFormState({ ...formState, name: e.target.value });
+                }}
                 autoFocus
               />
             </Grid>
@@ -97,7 +107,9 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 value={formState.email}
-                onChange={(e) => { SetFormState({ ...formState, email: e.target.value }) }}
+                onChange={(e) => {
+                  SetFormState({ ...formState, email: e.target.value });
+                }}
                 autoComplete="email"
               />
             </Grid>
@@ -111,7 +123,9 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 value={formState.password}
-                onChange={(e) => { SetFormState({ ...formState, password: e.target.value }) }}
+                onChange={(e) => {
+                  SetFormState({ ...formState, password: e.target.value });
+                }}
                 autoComplete="current-password"
               />
             </Grid>
@@ -123,7 +137,9 @@ export default function SignUp() {
                 name="city"
                 label="City"
                 id="city"
-                autoComplete="current-city"
+                onChange={(e) => {
+                  SetFormState({ ...formState, city: e.target.value });
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -131,10 +147,12 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
-                name="phone-no"
+                name="phone"
                 label="Phone Number"
-                id="phone-no"
-                autoComplete="current-phone-no"
+                id="phone"
+                onChange={(e) => {
+                  SetFormState({ ...formState, phone: e.target.value });
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -166,7 +184,6 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleRegister}
           >
             Sign Up
           </Button>
