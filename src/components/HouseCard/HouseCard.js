@@ -48,7 +48,7 @@ export default function HouseCard() {
       />
       <CardMedia
         className={classes.media}
-        image="/logo512.png"
+        image="/house.jpg"
         title="Room Photo"
       />
       <CardContent>
