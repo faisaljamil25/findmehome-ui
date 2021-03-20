@@ -16,6 +16,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { registerUser } from "../../api";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const history = useHistory();
+
   const [role, setRole] = React.useState("LANDLORD");
   const [formState, SetFormState] = React.useState({
     name: "",
@@ -57,6 +60,7 @@ export default function SignUp() {
     registerUser({ ...formState, role })
       .then(() => console.log("register"))
       .catch(() => console.log("Ere"));
+    history.push("/signin");
   };
 
   return (
@@ -189,7 +193,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/" variant="body2">
+              <Link to="/signup" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
