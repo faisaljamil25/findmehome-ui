@@ -12,20 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -61,7 +49,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const history = useHistory();
+  const submitHandler = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/auth/login");
+      console.log(response);
 
+      history.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -74,7 +72,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={submitHandler}>
             <TextField
               variant="outlined"
               margin="normal"

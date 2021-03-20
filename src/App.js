@@ -1,28 +1,20 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-
-import "./App.css";
-
-const App = () => {
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Routers from "./Routes";
+import { AuthContextProvider } from "./context/auth";
+import { SnackbarProvider } from "./context/snackbar";
+function App() {
   return (
     <>
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/signin" exact>
-            <SignIn />
-          </Route>
-          <Route path="/signup" exact>
-            <SignUp />
-          </Route>
-        </Switch>
-      </Router>
+      <AuthContextProvider>
+        <SnackbarProvider>
+          <BrowserRouter>
+            <Routers />
+          </BrowserRouter>
+        </SnackbarProvider>
+      </AuthContextProvider>
     </>
   );
-};
+}
 
 export default App;

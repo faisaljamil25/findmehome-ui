@@ -58,8 +58,8 @@ export default function SignUp() {
     e.preventDefault();
     console.log("here");
     registerUser({ ...formState, role })
-      .then(() => console.log("register"))
-      .catch(() => console.log("Ere"));
+      .then(() => alert("Registerd"))
+      .catch(() => console.log("Error"));
     history.push("/signin");
   };
 
