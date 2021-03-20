@@ -15,6 +15,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { registerUser } from "../../api";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,10 +39,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const [role, setRole] = React.useState("landlord");
+  const [role, setRole] = React.useState("LANDLORD");
+  const [formState, SetFormState] = React.useState({ name: "", email: "", password: "", phone: "" })
   const handleChange = (event) => {
     setRole(event.target.value);
   };
+
+  const handleRegister = () => {
+    registerUser({ ...formState, role }).then(() => console.log("register")).catch(() => console.log("Ere"))
+  }
+
+
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -60,13 +69,15 @@ export default function SignUp() {
                 name="firstName"
                 variant="outlined"
                 required
+                value={formState.name}
                 fullWidth
                 id="firstName"
                 label="First Name"
+                onChange={(e) => { SetFormState({ ...formState, name: e.target.value }) }}
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -76,7 +87,7 @@ export default function SignUp() {
                 name="lastName"
                 autoComplete="lname"
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -85,6 +96,8 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={formState.email}
+                onChange={(e) => { SetFormState({ ...formState, email: e.target.value }) }}
                 autoComplete="email"
               />
             </Grid>
@@ -97,6 +110,8 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                value={formState.password}
+                onChange={(e) => { SetFormState({ ...formState, password: e.target.value }) }}
                 autoComplete="current-password"
               />
             </Grid>
@@ -132,12 +147,12 @@ export default function SignUp() {
                   onChange={handleChange}
                 >
                   <FormControlLabel
-                    value="landlord"
+                    value="LANDLORD"
                     control={<Radio />}
                     label="Landlord"
                   />
                   <FormControlLabel
-                    value="tenant"
+                    value="TENANT"
                     control={<Radio />}
                     label="Tenant"
                   />
@@ -151,6 +166,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleRegister}
           >
             Sign Up
           </Button>
