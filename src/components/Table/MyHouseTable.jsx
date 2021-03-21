@@ -119,7 +119,7 @@ export default function DenseTable(props) {
   } else
     return (
       <>
-        <h1>No Events Found</h1>
+        <h1 style={{ textAlign: "center" }}>No House Found</h1>
       </>
     );
 }

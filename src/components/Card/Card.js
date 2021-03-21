@@ -43,8 +43,8 @@ const Card = ({
         Context2.openbarfun("success", "House Booked");
       history.push("/");
     } catch (error) {
-      console.log(error.response.data);
-      Context2.openbarfun("error", "Something Went Wrong");
+      console.log(error);
+      Context2.openbarfun("error", "House Already Booked");
     }
   };
   return (

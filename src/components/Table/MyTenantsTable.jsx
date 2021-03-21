@@ -56,7 +56,7 @@ export default function TenantTable(props) {
   } else
     return (
       <>
-        <h1>No Events Found</h1>
+        <h1>No Tenants Found</h1>
       </>
     );
 }

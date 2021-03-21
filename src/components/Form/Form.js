@@ -87,8 +87,9 @@ export default function SellHouseForm() {
       city: newValue,
     });
   };
-  const submitHandler = async (values) => {
+  const handleSubmit = async (values) => {
     try {
+      console.log("working");
       const body = `mutation{
   createHouse(HouseInput:{
     name:"${values.name}",
@@ -117,7 +118,7 @@ export default function SellHouseForm() {
         Context2.openbarfun("success", "House added to sell");
       history.push("/");
     } catch (error) {
-      console.log(error.response.data);
+      // console.log(error.response.data);
       Context2.openbarfun("error", "Something Went Wrong");
     }
   };
@@ -129,7 +130,7 @@ export default function SellHouseForm() {
           <Formik
             initialValues={inititalValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => submitHandler(values)}
+            onSubmit={(values) => handleSubmit(values)}
           >
             {({ values, setValues }) => (
               <Form aria-label="register form" id="register">
@@ -269,6 +270,9 @@ export default function SellHouseForm() {
                       color="secondary"
                       variant="outlined"
                       className={classes.btn}
+                      onClick={() => {
+                        handleSubmit(values);
+                      }}
                     >
                       Submit
                     </Button>
