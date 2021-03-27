@@ -34,7 +34,7 @@ const Booked = () => {
               <div className="figure">
                 <img src="/house.jpg" alt="bg" />
                 <div className="figCaption">
-                  <div></div>
+                  <div>₹ 5000</div>
                   <span className="icon-eye"> 200</span>
                   <span className="icon-heart"> 54</span>
                   <span className="icon-bubble"> 13</span>
@@ -44,18 +44,18 @@ const Booked = () => {
                 </div>
                 <div className="figType">5 Sharing </div>
               </div>
-              <h2>House 1</h2>
+              <h2>Modern Residency</h2>
               <div className="cardAddress">
                 <span className="icon-pointer" />
-                MP Nagar, Bhopal
+                House No. 453, Dwarka Sector 32 , New Delhi
               </div>
               <div className="cardAddress">
-                3 BHK Apartment in this Bhopal location.The property is on the
-                floor number 6 in a building which has 13 floors.
+                3 BHK Apartment in Dwarka, New Delhi location. This apartment is
+                shared by 3 people.
               </div>
               <ul className="cardFeat">
                 <li>
-                  <span className="icon-frame" /> 900 sq ft
+                  <span className="icon-frame" /> 900sqft
                 </li>
               </ul>
             </div>
