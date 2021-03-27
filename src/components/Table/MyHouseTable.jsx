@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Table,
   TableBody,
@@ -7,12 +7,12 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import { Paper, Button } from "@material-ui/core";
-import axios from "axios";
+import { Paper, Button } from '@material-ui/core';
+import axios from 'axios';
 
-import TenantDialog from "../DialogBox/TenantDialogBox";
+import TenantDialog from '../DialogBox/TenantDialogBox';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -31,13 +31,13 @@ const getMyTenants = async (HouseId) => {
                    }
                   }`;
     const response = await axios.post(
-      "http://localhost:8000/graphql",
+      `${process.env.REACT_APP_BACKEND}/graphql`,
       {
         query: body,
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -75,36 +75,36 @@ export default function DenseTable(props) {
         <TableContainer component={Paper}>
           <Table
             className={classes.table}
-            size="small"
-            aria-label="a dense table"
+            size='small'
+            aria-label='a dense table'
           >
             <TableHead>
               <TableRow>
-                <TableCell align="left">HouseId</TableCell>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Sharing</TableCell>
-                <TableCell align="center">City</TableCell>
-                <TableCell align="center">Rent</TableCell>
-                <TableCell align="center">Tenants</TableCell>
+                <TableCell align='left'>HouseId</TableCell>
+                <TableCell align='center'>Name</TableCell>
+                <TableCell align='center'>Sharing</TableCell>
+                <TableCell align='center'>City</TableCell>
+                <TableCell align='center'>Rent</TableCell>
+                <TableCell align='center'>Tenants</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((house) => (
                 <TableRow key={house._id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell component='th' scope='row'>
                     {house._id}
                   </TableCell>
-                  <TableCell align="center">{house.name}</TableCell>
-                  <TableCell align="center">{house.totalSharing}</TableCell>
-                  <TableCell align="center">{house.city}</TableCell>
-                  <TableCell align="center">{house.rent}</TableCell>
-                  <TableCell align="center">
+                  <TableCell align='center'>{house.name}</TableCell>
+                  <TableCell align='center'>{house.totalSharing}</TableCell>
+                  <TableCell align='center'>{house.city}</TableCell>
+                  <TableCell align='center'>{house.rent}</TableCell>
+                  <TableCell align='center'>
                     <Button
                       onClick={() => {
                         handleTenants(house._id);
                       }}
-                      variant="outlined"
-                      color="secondary"
+                      variant='outlined'
+                      color='secondary'
                     >
                       Tenants
                     </Button>
@@ -119,7 +119,7 @@ export default function DenseTable(props) {
   } else
     return (
       <>
-        <h1 style={{ textAlign: "center" }}>No House Found</h1>
+        <h1 style={{ textAlign: 'center' }}>No House Found</h1>
       </>
     );
 }

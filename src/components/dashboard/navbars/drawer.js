@@ -1,40 +1,40 @@
-import React, { useContext } from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
-import Button from "@material-ui/core/Button";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import list from "./list";
-import ViewComfyIcon from "@material-ui/icons/ViewComfy";
-import CreateIcon from "@material-ui/icons/Create";
-import PersonIcon from "@material-ui/icons/Person";
-import DoneIcon from "@material-ui/icons/Done";
-import AuthContext from "../../../context/auth";
-import Snackbar from "../../../context/snackbar";
+import React, { useContext } from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MailIcon from '@material-ui/icons/Mail';
+import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import list from './list';
+import ViewComfyIcon from '@material-ui/icons/ViewComfy';
+import CreateIcon from '@material-ui/icons/Create';
+import PersonIcon from '@material-ui/icons/Person';
+import DoneIcon from '@material-ui/icons/Done';
+import AuthContext from '../../../context/auth';
+import Snackbar from '../../../context/snackbar';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -51,46 +51,46 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 36,
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
   drawer: {
-    marginTop: "50px",
-    display: "flex",
-    flexDirection: "column",
+    marginTop: '50px',
+    display: 'flex',
+    flexDirection: 'column',
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap",
+    whiteSpace: 'nowrap',
   },
   drawerOpen: {
     //position: "absolute",
-    marginTop: "50px",
-    display: "flex",
+    marginTop: '50px',
+    display: 'flex',
     width: drawerWidth,
-    transition: theme.transitions.create("width", {
+    transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerClose: {
     //position: "absolute",
-    display: "flex",
-    marginTop: "50px",
-    transition: theme.transitions.create("width", {
+    display: 'flex',
+    marginTop: '50px',
+    transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    overflowX: "hidden",
+    overflowX: 'hidden',
     width: theme.spacing(7) + 1,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
   toolbar: {
-    alignSelf: "center",
-    order: "99",
+    alignSelf: 'center',
+    order: '99',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -112,41 +112,43 @@ export default function MiniDrawer() {
   const history = useHistory();
 
   async function Logout() {
-    const logout = await axios.get("http://localhost:8000/auth/logout");
-    Context2.openbarfun("info", logout.data);
+    const logout = await axios.get(
+      `${process.env.REACT_APP_BACKEND}/auth/logout`
+    );
+    Context2.openbarfun('info', logout.data);
     console.log(logout);
     await Context.getLoggedIn();
-    history.push("/");
+    history.push('/');
   }
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position='fixed'
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
+            color='inherit'
+            aria-label='open drawer'
             onClick={() => setOpen(!open)}
-            edge="start"
+            edge='start'
             className={clsx(classes.menuButton, {
               [classes.hide]: false,
             })}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant='h6' className={classes.title}>
             Dashboard
           </Typography>
 
           <Button
             className={classes.btn}
-            variant="contained"
-            color="secondary"
+            variant='contained'
+            color='secondary'
             onClick={Logout}
           >
             Logout
@@ -154,7 +156,7 @@ export default function MiniDrawer() {
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
+        variant='permanent'
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
           [classes.drawerClose]: !open,
@@ -197,11 +199,11 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          <ListItem button="profile">
+          <ListItem button='profile'>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="Profile" />
+            <ListItemText primary='Profile' />
           </ListItem>
         </List>
         <div className={classes.toolbar}>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const url = process.env.REACT_APP_BACKEND;
 
@@ -11,8 +11,8 @@ export const registerUser = async ({
   role,
 }) => {
   try {
-    if (role === "landlord") {
-      const res = await axios.post(`${url}/lregister`, {
+    if (role === 'landlord') {
+      const res = await axios.post(`${url}/auth/lregister`, {
         name,
         email,
         password,
@@ -21,7 +21,7 @@ export const registerUser = async ({
       });
       return res;
     } else {
-      const res = await axios.post(`${url}/tregister`, {
+      const res = await axios.post(`${url}/auth/tregister`, {
         name,
         email,
         password,
@@ -37,7 +37,7 @@ export const registerUser = async ({
 
 export const loginUser = async ({ email, password, role }) => {
   try {
-    const res = await axios.post(`${url}/login`, {
+    const res = await axios.post(`${url}/auth/login`, {
       email,
       password,
       role,

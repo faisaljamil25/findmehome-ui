@@ -1,19 +1,19 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
 const AuthContext = React.createContext();
 
 function AuthContextProvider(props) {
   const object = {
     isLoggedIn: false,
-    id: "",
+    id: '',
   };
   const [authdata, setAuthdata] = React.useState(object);
 
   async function getLoggedIn() {
     try {
       const LoggedInData = await axios.get(
-        "http://localhost:8000/auth/isLoggedIn"
+        `${process.env.REACT_APP_BACKEND}/auth/isLoggedIn`
       );
 
       setAuthdata(LoggedInData.data);
